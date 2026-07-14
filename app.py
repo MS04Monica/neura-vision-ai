@@ -325,21 +325,25 @@ Vision Transformer and GPT-2.
 # ============================================================
 # LOAD MODEL
 # ============================================================
-
 @st.cache_resource
 def load_model():
 
     model = VisionEncoderDecoderModel.from_pretrained(
-        "nlpconnect/vit-gpt2-image-captioning"
+        "nlpconnect/vit-gpt2-image-captioning",
+        local_files_only=False
     )
 
     processor = ViTImageProcessor.from_pretrained(
-        "nlpconnect/vit-gpt2-image-captioning"
+        "nlpconnect/vit-gpt2-image-captioning",
+        local_files_only=False
     )
 
     tokenizer = AutoTokenizer.from_pretrained(
-        "nlpconnect/vit-gpt2-image-captioning"
+        "nlpconnect/vit-gpt2-image-captioning",
+        local_files_only=False
     )
+
+    model.eval()
 
     return model, processor, tokenizer
 
