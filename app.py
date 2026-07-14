@@ -328,22 +328,29 @@ Vision Transformer and GPT-2.
 @st.cache_resource
 def load_model():
 
+    st.info("Step 1: Starting model loading...")
+
+    st.info("Loading VisionEncoderDecoderModel...")
     model = VisionEncoderDecoderModel.from_pretrained(
         "nlpconnect/vit-gpt2-image-captioning",
-        local_files_only=False
+        low_cpu_mem_usage=True
     )
+    st.success("VisionEncoderDecoderModel loaded")
 
+    st.info("Loading ViTImageProcessor...")
     processor = ViTImageProcessor.from_pretrained(
         "nlpconnect/vit-gpt2-image-captioning",
-        local_files_only=False
     )
+    st.success("ViTImageProcessor loaded")
 
+    st.info("Loading AutoTokenizer...")
     tokenizer = AutoTokenizer.from_pretrained(
         "nlpconnect/vit-gpt2-image-captioning",
-        local_files_only=False
     )
+    st.success("AutoTokenizer loaded")
 
     model.eval()
+    model.to("cpu")
 
     return model, processor, tokenizer
 
